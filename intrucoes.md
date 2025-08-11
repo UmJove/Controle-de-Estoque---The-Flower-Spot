@@ -38,15 +38,15 @@ atributos fora das classes).
 programação.
 ○ Uso coerente de POO: encapsulamento, herança, polimorfismo.
 Entregáveis
-● Código-fonte completo do projeto.
-● Descrição textual breve do tema e funcionalidades do aplicativo (máx. 1 página).
-● O professor poderá solicitar demonstração do funcionamento.
-Critérios de Avaliação
-● Atendimentos aos requisitos técnicos (classes, herança, atributos, métodos).
-● Uso correto de polimorfismo quando aplicável.
-● Organização e clareza do código.
-● Funcionamento do menu e operações.
-● Uso correto de POO (encapsulamento, herança, abstração, polimorfismo).
+- Código-fonte completo do projeto.
+- Descrição textual breve do tema e funcionalidades do aplicativo (máx. 1 página).
+- O professor poderá solicitar demonstração do funcionamento.
+### Critérios de Avaliação
+- Atendimentos aos requisitos técnicos (classes, herança, atributos, métodos).
+- Uso correto de polimorfismo quando aplicável.
+- Organização e clareza do código.
+- Funcionamento do menu e operações.
+- Uso correto de POO (encapsulamento, herança, abstração, polimorfismo).
 Exemplo de Projeto
 Tema: Sistema de Gerenciamento de Biblioteca
 Descrição: O sistema permite gerenciar livros e usuários, permitindo cadastrar, listar e
