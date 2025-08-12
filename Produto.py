@@ -73,7 +73,17 @@ class Flor(Produto):
             dias=int((validade_segundos-entrega_segundos)/(60*60*24))
             print(f"A entregar viavel dias {dias}")
 
+    def getTempo_vida(self):
+        return self.Tempo_vida
 
+    def setTempo_vida(self, novo_tempo_vida):
+              self.Tempo_vida = novo_tempo_vida
+
+    def getdata_colheita(self):
+        return self.data_colheita
+
+    def setdata_colheita(self, novo_data_colheita):
+            self.data_colheita = novo_data_colheita
 
 
 # Testes de código
@@ -81,6 +91,11 @@ if __name__ == "__main__":
 
     f1=Flor("Rosa Vermelha",10,5,1,10,"05/08/2025")
     f1.verificar_viabilidade_entrega("16/08/2025")
+    print(f1.getdata_colheita())
+    f1.setdata_colheita("06/08/2025")
+    print(f1.getdata_colheita)
+    # print(f1.getTempo_vida())
+
 
 
     produto_teste = Produto(1, "Tulipas", 22.50, 10)
