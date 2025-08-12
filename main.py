@@ -15,7 +15,10 @@ def menu():
         print("2. Cadastrar novo produto") # add ver com quantidades atualizadas em estoque
         print("3. Editar produto")     
         print("4. Excluir produto")
-        print("5. Sair")
+        print("5. Registrar recebimento de insumos")
+        print("6. Calcular valor promocional")
+        print("7. Verificar estoque de produto")
+        print("8. Sair")
 
         opcao = input("Escolha uma opção: ")
 
@@ -28,6 +31,12 @@ def menu():
         elif opcao == "4":
             excluir_produto()
         elif opcao == "5":
+            registrar_recebimento_insumo()
+        elif opcao == "6":
+            calc_promocao()
+        elif opcao == "7":
+            verificar_estoque()
+        elif opcao == "8":
             sair()
         else:
             print("Opção inválida. Tente novamente.")
@@ -85,22 +94,27 @@ def editar_produto():
 def excluir_produto():
     listar_produtos()
     try:
-        id = int(input("\nDigite o ID do produto que deseja excluir: "))
-        if id in produtos:
-            confirmacao = input(f"Tem certeza que deseja excluir '{produtos[id]['nome']}'? (s/n): ")
-            if confirmacao.lower() == 's':
-                del produtos[id]
-                print("Produto excluído com sucesso.")
-            else:
-                print("Operação cancelada.")
-        else:
-            print("Produto com esse ID não encontrado.")
+        id_input = int(input("\nDigite o ID do produto que deseja excluir: "))
+        for produto in produtos:
+            if produto.id == id_input:
+                confirmacao = input(f"\nTem certeza que deseja excluir '{produto.nome}'? (S/N): ")
+                if confirmacao.lower() == 's':
+                    produto_exluido = produtos.pop(produto.id)
+                    print(f"Produto {produto_exluido.nome} excluído com sucesso.")
+                else:
+                    print("Operação cancelada.")
+
     except ValueError:
         print("Entrada inválida.")
 
+def registrar_recebimento_insumo():
+    pass
 
+def calc_promocao():
+    pass
 
-
+def verificar_estoque():
+    pass
 
 def inicio():
     print("\nSeja bem-vindo à 'The Flower Spot', sua floricultura digital!")
