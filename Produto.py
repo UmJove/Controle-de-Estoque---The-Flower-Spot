@@ -10,13 +10,21 @@ class Produto:
     # Métodos
     def rg_chegada_de_insumo(self, data_recebimento, quantidade_recebida):
         self.quantidade += quantidade_recebida
-        print(f"Quantidade de {self.nome} (ID = {self.id}) atualizada: {self.quantidade} -- RG {data_recebimento}")
+        print(f"\nQuantidade de atualizada \nID {self.id} - {self.nome}: {self.quantidade} unidades -- RG {data_recebimento}")
         return
     
     def promocao(self, porcentagem_desconto):
         preco_promocao = self.preco - (porcentagem_desconto*self.preco/100)
-        return f"{preco_promocao:.2f}"
+        return float(f"{preco_promocao:.2f}")
 
+    def _confirmar_produto(self):
+        confimacao = input(f"\nConfirme produto: \nID - {self.id} - {self.nome} (S/N): ") #transformação em método
+        if confimacao.lower() == "n":
+            return False
+        elif confimacao.lower() =="s":
+            return True
+        else:
+            print("\nOpção invalida")
     # verificar estoque e necessidade de repor
 
     # Getters e Setters

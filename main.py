@@ -69,7 +69,7 @@ def cadastrar_produto():
 def editar_produto():
     listar_produtos()
     try:
-        id_input = int(input("\nDigite o ID do produto que deseja editar: "))
+        id_input = int(input("\nID do produto que deseja editar: "))
         for produto in produtos:
             if produto.id == id_input:
                 print(f"Editando produto: ID {produto.id} - {produto.nome}")
@@ -94,13 +94,13 @@ def editar_produto():
 def excluir_produto():
     listar_produtos()
     try:
-        id_input = int(input("\nDigite o ID do produto que deseja excluir: "))
+        id_input = int(input("\nID do produto que deseja excluir: "))
         for produto in produtos:
             if produto.id == id_input:
                 confirmacao = input(f"\nTem certeza que deseja excluir '{produto.nome}'? (S/N): ")
                 if confirmacao.lower() == 's':
                     produto_exluido = produtos.pop(produto.id)
-                    print(f"Produto {produto_exluido.nome} excluído com sucesso.")
+                    print(f"Produto {produto_exluido.get_nome()} excluído com sucesso.")
                 else:
                     print("Operação cancelada.")
 
@@ -108,16 +108,37 @@ def excluir_produto():
         print("Entrada inválida.")
 
 def registrar_recebimento_insumo():
-    pass
+    id_input = int(input("\nID do produto que deseja registrar: "))
+    for produto in produtos:
+        if id_input == produto.id:
+            confimacao = input(f"\nConfirme produto: \nID - {produto.get_id()} - {produto.get_nome()} (S/N): ")
+            if confimacao.lower() == "n":
+                return
+            elif confimacao.lower() =="s":
+                data_recebimento = input("Data: ")
+                quantidade_recebida = int(input("Quantidade recebida: "))
+                produto.rg_chegada_de_insumo(data_recebimento, quantidade_recebida)
+            else:
+                print("Opção invalida")
+                registrar_recebimento_insumo() # modificar para try except
+
+    
 
 def calc_promocao():
-    pass
+    id_input = int(input("\nID do produto: "))
+    for produto in produtos:
+        if id_input == produto.id:
+            if produto._confirmar_produto() == True:
+                porcentagem_desconto = float(input("\nDigite a porcentagem a ser descontada: "))
+                print(f"{produto.get_nome()}\nDesconto: - R$ {(produto.preco - produto.promocao(porcentagem_desconto)):.2f} \nPreço promocional: R$ {produto.promocao(porcentagem_desconto)}")
+            else:
+                calc_promocao() # modificar para try except
 
 def verificar_estoque():
     pass
 
 def inicio():
-    print("\nSeja bem-vindo à 'The Flower Spot', sua floricultura digital!")
+    print("\nCONTROLE DE ESTOQUE")
     menu()
     
 def sair():
