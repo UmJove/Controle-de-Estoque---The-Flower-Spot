@@ -2,6 +2,10 @@ carrinho = {}
 dados_do_pedido = {}
 endereço = {}
 
+# lotes = {} #Possível funcionalidade atrelada ao método rg_chegada_de_insumo()
+# data_recebimento = input(f"Data recebimento: ")
+# quantidade_recebida = int(input(f"Quantidade ({self.nome}) recebida: "))
+
 produtos = {
     1: {"nome": "Buquê com 3 Rosas Brancas", "preco": 100.00, "Quantidade": 20},
     2: {"nome": "Buquê com 3 Rosas vermelhas", "preco": 100.0, "Quantidade": 20},

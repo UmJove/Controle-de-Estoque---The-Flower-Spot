@@ -7,21 +7,19 @@ class Produto:
         self.preco = preco
         self.quantidade = quantidade
 
-    #métodos
+    # Métodos
     def rg_chegada_de_insumo(self, data_recebimento, quantidade_recebida):
-        # lotes = {}
-        # data_recebimento = input(f"Data recebimento: ")
-        # quantidade_recebida = int(input(f"Quantidade ({self.nome}) recebida: "))
         self.quantidade += quantidade_recebida
         print(f"Quantidade de {self.nome} (ID = {self.id}) atualizada: {self.quantidade} -- RG {data_recebimento}")
-
+        return
+    
     def promocao(self, porcentagem_desconto):
         preco_promocao = self.preco - (porcentagem_desconto*self.preco/100)
         return f"{preco_promocao:.2f}"
 
     # verificar estoque e necessidade de repor
 
-    #Getters e Setters
+    # Getters e Setters
     def get_id(self):
         return self.id
     
@@ -39,7 +37,6 @@ class Produto:
     def set_nome(self, novo_nome):
         self.nome = novo_nome
         return True
-        # novo_id = int(input("Digite o id que deseja atribuir ao produto")
 
     def get_preco(self):
         return self.preco
@@ -57,23 +54,12 @@ class Produto:
 
 
 
-
-if __name__ == "__main__":
-    produto_teste = Produto(1, "Tulipas", 22.50, 10)
-    # produto_teste.chegada_de_insumo()
-    print(produto_teste.promocao(10))
-
-    def verificar_quantidade(self):
-        return 
-
 class Flor(Produto):
     def __init__(self, id, nome, preco, quantidade,tempo_vida,data_colheita):
         super().__init__(id, nome, preco, quantidade)
         self.tempo_vida=tempo_vida
         self.data_colheita=data_colheita
         
-
-    
 
     def verificar_viabilidade_entrega(self,data_entrega):
         colheita=time.strptime(self.data_colheita,"%d/%m/%Y")
@@ -87,5 +73,16 @@ class Flor(Produto):
             dias=int((validade_segundos-entrega_segundos)/(60*60*24))
             print(f"A entregar viavel dias {dias}")
 
-f1=Flor("Rosa Vermelha",10,5,1,10,"05/08/2025")
-f1.verificar_viabilidade_entrega("16/08/2025")
+
+
+
+# Testes de código
+if __name__ == "__main__":
+
+    f1=Flor("Rosa Vermelha",10,5,1,10,"05/08/2025")
+    f1.verificar_viabilidade_entrega("16/08/2025")
+
+
+    produto_teste = Produto(1, "Tulipas", 22.50, 10)
+    # produto_teste.chegada_de_insumo()
+    print(produto_teste.promocao(10))
