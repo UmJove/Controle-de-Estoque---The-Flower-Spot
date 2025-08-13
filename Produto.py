@@ -76,47 +76,66 @@ class Produto:
 class Flor(Produto):
     def __init__(self, id, nome, preco, quantidade,tempo_vida,data_colheita):
         super().__init__(id, nome, preco, quantidade)
-        self.tempo_vida=tempo_vida
-        self.data_colheita=data_colheita
+        self.tempo_vida = tempo_vida
+        self.data_colheita = data_colheita
         
 
-    def verificar_viabilidade_entrega(self,data_entrega):
-        colheita=time.strptime(self.data_colheita,"%d/%m/%Y")
-        colheita_segundos=time.mktime(colheita)
-        validade_segundos=colheita_segundos+((self.tempo_vida)*60*60*24)
-        entrega=time.strptime(data_entrega,"%d/%m/%Y")
-        entrega_segundos=time.mktime(entrega)
-        if entrega_segundos>validade_segundos:
-            print("Não é possivel fazer a entregar")
+    def verificar_viabilidade_entrega(self, data_entrega):
+        colheita = time.strptime(self.data_colheita,"%d/%m/%Y")
+        colheita_segundos = time.mktime(colheita)
+        validade_segundos = colheita_segundos+((self.tempo_vida)*60*60*24)
+        entrega = time.strptime(data_entrega,"%d/%m/%Y")
+        entrega_segundos = time.mktime(entrega)
+        if entrega_segundos > validade_segundos:
+            print("\nNão é possivel fazer a entregar")
         else:
             dias=int((validade_segundos-entrega_segundos)/(60*60*24))
-            print(f"A entregar viavel dias {dias}")
+            print(f"\nA entregar viável dias {dias}")
 
-    def getTempo_vida(self):
-        return self.Tempo_vida
+    def get_tempo_vida(self):
+        return f"{self.tempo_vida} dias"
 
-    def setTempo_vida(self, novo_tempo_vida):
-              self.Tempo_vida = novo_tempo_vida
+    def set_tempo_vida(self, novo_tempo_vida):
+        self.tempo_vida = novo_tempo_vida
+        return True
 
-    def getdata_colheita(self):
+    def get_data_colheita(self):
         return self.data_colheita
 
-    def setdata_colheita(self, novo_data_colheita):
-            self.data_colheita = novo_data_colheita
-
+    def set_data_colheita(self, novo_data_colheita):
+        self.data_colheita = novo_data_colheita
+        return True
 
 # Testes de código
 if __name__ == "__main__":
+    #instanciando objeto para teste
+    f1 = Flor(1, "Rosa Vermelha", 10.90, 5, 10, "05/08/2025")
+            # id, nome,           preco, qtd, vida, colheita
 
-    f1=Flor("Rosa Vermelha",10,5,1,10,"05/08/2025")
+    
+    # testando getters e setters
+    # herdados
+    print(f"\nID - {f1.get_id()}\
+          \n{f1.get_nome()}\
+          \n{f1.get_preco():.2f}\
+          \n{f1.get_quantidade()} unidades")
+    
+    
+    print("\nAntes")
+    print("colheita:",f1.get_data_colheita())
+    print("vida:",f1.get_tempo_vida())
+    
+    # método específico
     f1.verificar_viabilidade_entrega("16/08/2025")
-    print(f1.getdata_colheita())
-    f1.setdata_colheita("06/08/2025")
-    print(f1.getdata_colheita)
-    # print(f1.getTempo_vida())
+    
+    f1.set_data_colheita("06/08/2025")
+    f1.set_tempo_vida(15)
+    
+    print("\nDepois")
+    print("colheita:",f1.get_data_colheita())
+    print("vida:",f1.get_tempo_vida())
+
+    f1.verificar_viabilidade_entrega("16/08/2025")
 
 
-
-    produto_teste = Produto(1, "Tulipas", 22.50, 10)
-    # produto_teste.chegada_de_insumo()
-    print(produto_teste.promocao(10))
+    print(f"\n{"-"*10}fim{"-"*10}\n")
