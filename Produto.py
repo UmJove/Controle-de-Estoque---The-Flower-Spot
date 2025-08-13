@@ -17,7 +17,17 @@ class Produto:
         preco_promocao = self.preco - (porcentagem_desconto*self.preco/100)
         return float(f"{preco_promocao:.2f}")
 
-    def _confirmar_produto(self):
+    def verificar_estoque(self):
+        if self.quantidade >= 10:
+            return f"\n>> {self.quantidade} unidades de {self.nome} em estoque."
+        elif self.quantidade < 10 and self.quantidade >= 5:
+            return f"\n>> Estoque baixo!\n- {self.quantidade} unidade(s) de {self.nome}."
+        elif self.quantidade < 5 and self.quantidade > 0:
+            return f"\n>> Estoque muito baixo!\n- {self.quantidade} unidade(s) de {self.nome}."
+        else:
+            return f"\n>> ESTOQUE VAZIO!\n- Reposição imediata recomendada!"
+        
+    def confirmar_produto(self):
         confimacao = input(f"\nConfirme produto: \nID - {self.id} - {self.nome} (S/N): ") #transformação em método
         if confimacao.lower() == "n":
             return False
@@ -25,7 +35,8 @@ class Produto:
             return True
         else:
             print("\nOpção invalida")
-    # verificar estoque e necessidade de repor
+            
+
 
     # Getters e Setters
     def get_id(self):

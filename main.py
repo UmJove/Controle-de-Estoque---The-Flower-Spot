@@ -1,12 +1,15 @@
 from Produto import Produto
-
+# instanciação de produtos para testes # enquanto não há permanencia de dados
 p1 = Produto(1, "Rosas Brancas", 24.90, 20)
 p2 = Produto(2, "Rosas Vermelhas", 29.90, 10)
-p3 = Produto(3, "Tulipa", 34.90, 20)
-p4 = Produto(4, "Girassol", 14.90, 10)
+p3 = Produto(3, "Tulipa", 34.90, 9)
+p4 = Produto(4, "Girassol", 14.90, 5)
+p5 = Produto(5, "Orquídia", 34.90, 4)
+p6 = Produto(6, "Rosa Cor de Rosa", 21.90, 1)
+p7 = Produto(7, "Muda de Jasmim", 9.90, 0)
 
-produtos = [p1,p2,p3,p4]
-estoque_dados = {}
+produtos = [p1,p2,p3,p4,p5,p6,p7] 
+estoque_dados = {} # dados tratados para implementação de salvamento 
 
 def menu(): 
     while True:
@@ -20,7 +23,7 @@ def menu():
         print("7. Verificar estoque de produto")
         print("8. Sair")
 
-        opcao = input("Escolha uma opção: ")
+        opcao = input("\nEscolha uma opção: ")
 
         if opcao == "1":
             listar_produtos()
@@ -59,7 +62,7 @@ def cadastrar_produto():
         
         produtos.append(novo_produto)
 
-        ## Uppar dados (posteriorment em json)
+        # dados tratados para implementação de salvamento # Uppar dados (posteriormente em json)
         estoque_dados[novo_produto.id] = {"nome":novo_produto.nome, "preço":novo_produto.preco, "quantidade":novo_produto.quantidade}
         print(f"\nProduto cadastrado \nID {novo_produto.id} - {estoque_dados[novo_produto.id]}!")
 
@@ -121,21 +124,35 @@ def registrar_recebimento_insumo():
             else:
                 print("Opção invalida")
                 registrar_recebimento_insumo() # modificar para try except
-
     
-
 def calc_promocao():
     id_input = int(input("\nID do produto: "))
     for produto in produtos:
         if id_input == produto.id:
-            if produto._confirmar_produto() == True:
+            if produto.confirmar_produto() == True:
                 porcentagem_desconto = float(input("\nDigite a porcentagem a ser descontada: "))
                 print(f"{produto.get_nome()}\nDesconto: - R$ {(produto.preco - produto.promocao(porcentagem_desconto)):.2f} \nPreço promocional: R$ {produto.promocao(porcentagem_desconto)}")
             else:
-                calc_promocao() # modificar para try except
+                calc_promocao() # modificar para try except (?)
 
 def verificar_estoque():
-    pass
+    while True:
+        try:
+            id_input = int(input("\nID do produto: "))  
+            produto_encontrado = None
+            for produto in produtos:
+                if id_input == produto.get_id():
+                    produto_encontrado = produto
+                    break
+            if produto_encontrado:
+                if produto.confirmar_produto() == True:
+                    print(produto.verificar_estoque())
+                    return
+            else:
+                raise ValueError("ID não encontrado. Tente novamente.")
+        except ValueError as e:
+            print(f"\nErro: {e}")
+            continue
 
 def inicio():
     print("\nCONTROLE DE ESTOQUE")
