@@ -12,7 +12,7 @@ def menu():
     while True:
         print("\n--- Menu ---")
         print("1. Listar produtos em estoque")
-        print("2. Cadastrar novo produto") # add ver com quantidades atualizadas em estoque
+        print("2. Cadastrar novo produto")
         print("3. Editar produto")     
         print("4. Excluir produto")
         print("5. Registrar recebimento de insumos")
@@ -54,7 +54,7 @@ def cadastrar_produto():
         quantidade = int(input("Quantidade em estoque: "))
 
         # Gerar novo ID automático baseado no maior ID atual
-        novo_id = (len(produtos) + 1)
+        novo_id = ((produtos[-1]).get_id()) + 1
         novo_produto = Produto(novo_id, nome, preco, quantidade)
         
         produtos.append(novo_produto)
@@ -99,7 +99,7 @@ def excluir_produto():
             if produto.id == id_input:
                 confirmacao = input(f"\nTem certeza que deseja excluir '{produto.nome}'? (S/N): ")
                 if confirmacao.lower() == 's':
-                    produto_exluido = produtos.pop(produto.id)
+                    produto_exluido = produtos.pop((produto.get_id())-1)
                     print(f"Produto {produto_exluido.get_nome()} excluído com sucesso.")
                 else:
                     print("Operação cancelada.")
